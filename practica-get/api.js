@@ -3,7 +3,7 @@ let pagina = 1
 const btnSiguente = document.getElementById('btnSiguente')
 const btnAnterior = document.getElementById('btnAnterior')
 
-btnSiguente.addEventListener('click' , () =>{
+btnSiguente.addEventListener('click' , ()=> {
     if(pagina <1000){
         titulos ="";
         pagina += 1;

@@ -1,27 +1,38 @@
 let carta =''
-axios.get('http://175.10.0.166:8080/list')
+const carga = document.getElementById('carga')
+
+
+const getDatabase = () => axios.get('http://175.10.0.166:8080/list')
 .then((res)=>{
-    console.log(res.data)
+    console.log(res)
     res.data.forEach(data=> {
-        carta += `
-        <div class=" border-2 border-gray-600 rounded-xl w-60 flex flex-col items-center">
-       <h1 class="text-sky-400">${data.title}</h1>
-       <p class="text-xs">${data.description}</p>
-       <img class="w-40 h-40" src="${data.image}">
-       <h2 class="">Price: ${data.price}</h2>
+        carta += ` 
+        <div class="bg-gray-200 border-2 border-gray-600 rounded-xl w-60 flex flex-col font-mono
+         items-center">
+        <ul class="flex flex-col">
+       <li class=" text-center text-lg p-2">Variador s100</li>
+       <li class="text-sm p-2">N°:1953</li>
+       <li class="text-sm p-2">Nombre del cliente:De Simone Miguel</li>
+       <li class="text-sm p-2">Potencia:7,5kW</li>
+       <li class="text-sm p-2">Fecha de ingreso:10/5 13:30hs</li>
+       </ul>
+       <button type="button" class="bg-green-700 text p-2 mb-2 rounded-xl text-white">En proceso</button>
         </div>
-
-
         `
         document.getElementById('contenedor').innerHTML = carta;
     });
 })
 .catch((err)=>{console.log(err)})
 
-/*axios.post('http://175.10.0.179:8080/testPost',{
-frutas
-})
-.then((res)=>{console.log(res);})
-.catch((err)=>{console.log(err)}) 
-*/
+const getDatabaseFaker = () => axios.get('http://175.10.0.166:8080/faker')
+.then((res)=>{console.log(res)})
+.catch((err)=>{console.log(err)})
+
+
+
+getDatabase()
+
+
+
+
 
