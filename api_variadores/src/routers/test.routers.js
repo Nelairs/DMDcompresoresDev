@@ -1,6 +1,7 @@
 import express from 'express';
 import  cors    from    'cors';
 import faker    from    '@faker-js/faker';
+import  *   as dbMethods from '../db/db.methods.js';
 
 
 const   app =   express();
@@ -15,8 +16,8 @@ app.use(cors());
 /* -------------------------------------------------------------------------- */
 
 router.get('/', (req,   res)    =>  {
-
-    res.sendStatus(404);
+    dbMethods.create();
+    res.sendStatus(200);
 });
 
 router.get('/faker', (req,   res)    =>  {
@@ -38,6 +39,11 @@ router.get('/faker', (req,   res)    =>  {
 router.get('/list', (req,   res)    =>  {
 
     res.status(200).send(arrFaker);
+});
+
+router.get('/formVar',  (req,   res)    =>  {
+
+    
 })
 
 /* -------------------------------------------------------------------------- */
@@ -52,6 +58,13 @@ router.post('/testPost',    (req,   res)    =>  {
     console.log(arrayTest);
     res.status(200).send(`LO QUE MANDASTE ES ${JSON.stringify(arrayTest)}`);
 });
+
+router.post('/formPost',    (req,   res)    =>  {
+
+    const {body}    =   req;
+
+
+})
 
 
 

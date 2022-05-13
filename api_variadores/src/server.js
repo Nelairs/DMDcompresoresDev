@@ -3,6 +3,9 @@ import express, { json, urlencoded } from 'express';
 import  router  from './routers/test.routers.js';
 import dotenv   from 'dotenv';
 import  cors    from    'cors';
+import  './config/db.config.js';
+
+
 
 dotenv.config();
 
