@@ -41,10 +41,6 @@ router.get('/list', (req,   res)    =>  {
     res.status(200).send(arrFaker);
 });
 
-router.get('/formVar',  (req,   res)    =>  {
-
-    
-})
 
 /* -------------------------------------------------------------------------- */
 /*                                    POST                                    */
@@ -62,7 +58,11 @@ router.post('/testPost',    (req,   res)    =>  {
 router.post('/formPost',    (req,   res)    =>  {
 
     const {body}    =   req;
+    let     arrAux  =   {...body};
 
+    dbMethods.post(arrAux);
+
+    res.sendStatus(200);
 
 })
 

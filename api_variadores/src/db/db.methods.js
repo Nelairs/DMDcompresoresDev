@@ -9,8 +9,8 @@ const equipo1 = {
     numero_serie_equipo: "625537g12hq1",
     entrada_a_revision_desarrollo:  new Date(),
     estado_equipo:  1
-  };
-
+};
+/*
 export  async   function    create(){
 
     try {
@@ -20,7 +20,17 @@ export  async   function    create(){
         console.log(error);
     }
 }
+*/
 
+export  async   function    post(arrAux){
+
+    try {
+        const response  =   await   DbTestModel.create(arrAux);
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 
