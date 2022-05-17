@@ -3,12 +3,9 @@ import express, { json, urlencoded } from 'express';
 import  router  from './routers/test.routers.js';
 import dotenv   from 'dotenv';
 import  cors    from    'cors';
-import  './config/db.config.js';
-
-
 
 dotenv.config();
-
+import  './config/db.config.js';
 const   PORT  =  8080
 const app   =   express();
 app.use(express.json());

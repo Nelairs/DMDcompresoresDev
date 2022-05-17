@@ -41,10 +41,6 @@ router.get('/list', (req,   res)    =>  {
     res.status(200).send(arrFaker);
 });
 
-router.get('/formVar',  (req,   res)    =>  {
-
-    
-})
 
 router.get('/variadores',   (req,   res)    =>  {
 
@@ -75,9 +71,17 @@ router.post('/testPost',    (req,   res)    =>  {
 router.post('/formPost',    (req,   res)    =>  {
 
     const {body}    =   req;
+<<<<<<< HEAD
     let arrAux  =   {...body};
 
     dbMethods.post(arrAux);
+=======
+    let     arrAux  =   {...body};
+
+    dbMethods.post(arrAux);
+
+    res.sendStatus(200);
+>>>>>>> 8b7db680cd42e8fa8ad30a00c83e6fba0b2fab5d
 
     res.sendStatus(200);
 })
