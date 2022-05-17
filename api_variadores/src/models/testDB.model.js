@@ -22,7 +22,7 @@ const   Schema  =   new mongoose.Schema({
         type:   String
     },
     entrada_a_revision_desarrollo:{
-        type:   Date,
+        type:   String,
         required:   true
     },
     estado_equipo:{

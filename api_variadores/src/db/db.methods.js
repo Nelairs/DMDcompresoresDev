@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import  {   DbTestModel }   from    '../models/testDB.model.js';
 
-const equipo1 = {
+const equipoTest = {
     nombre_cliente: "DMD",
     numero_equipo: 1312,
     marca_equipo: "Danfoss",
@@ -11,24 +11,21 @@ const equipo1 = {
     estado_equipo:  1
   };
 
-export  async   function    create(){
+export  async   function    post(arrAux){
 
     try {
-        const response  =   await   DbTestModel.create(equipo1);
+        const response  =   await   DbTestModel.create(arrAux);
         console.log(response);
     } catch (error) {
         console.log(error);
     }
 }
 
-
-
-
 export  async   function    getAll(){
 
     try {
         const   response    =   await   DbTestModel.find();
-        console.log(response);
+        return  response;
     } catch (error) {
         console.log(error);
     }

@@ -8,7 +8,7 @@ const   app =   express();
 const router =  express.Router();
 
 const   arrFaker    =   [];
-
+let   arrAux    =   [];   
 app.use(cors());
 
 /* -------------------------------------------------------------------------- */
@@ -46,6 +46,19 @@ router.get('/formVar',  (req,   res)    =>  {
     
 })
 
+router.get('/variadores',   (req,   res)    =>  {
+
+    dbMethods.getAll()
+    .then(function(v)   {
+        arrAux = [];
+        arrAux =   v; 
+    })
+    .catch(function(err)  {
+        console.log('error:'    +   err);
+    });
+    res.status(200).send(arrAux)
+})
+
 /* -------------------------------------------------------------------------- */
 /*                                    POST                                    */
 /* -------------------------------------------------------------------------- */
@@ -62,12 +75,12 @@ router.post('/testPost',    (req,   res)    =>  {
 router.post('/formPost',    (req,   res)    =>  {
 
     const {body}    =   req;
+    let arrAux  =   {...body};
 
+    dbMethods.post(arrAux);
 
+    res.sendStatus(200);
 })
-
-
-
 
 
 export  default router;
