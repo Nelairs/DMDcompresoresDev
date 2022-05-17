@@ -9,15 +9,9 @@ const equipoTest = {
     numero_serie_equipo: "625537g12hq1",
     entrada_a_revision_desarrollo:  new Date(),
     estado_equipo:  1
-<<<<<<< HEAD
-  };
-
-export  async   function    post(arrAux){
-=======
 };
 /*
 export  async   function    create(){
->>>>>>> 8b7db680cd42e8fa8ad30a00c83e6fba0b2fab5d
 
     try {
         const response  =   await   DbTestModel.create(arrAux);
@@ -28,8 +22,6 @@ export  async   function    create(){
 }
 */
 
-<<<<<<< HEAD
-=======
 export  async   function    post(arrAux){
 
     try {
@@ -42,7 +34,6 @@ export  async   function    post(arrAux){
 
 
 
->>>>>>> 8b7db680cd42e8fa8ad30a00c83e6fba0b2fab5d
 export  async   function    getAll(){
 
     try {
