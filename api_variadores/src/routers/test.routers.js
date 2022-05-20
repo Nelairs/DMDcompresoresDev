@@ -80,5 +80,15 @@ router.post('/formPost',    (req,   res)    =>  {
     res.sendStatus(200);
 })
 
+router.post('/update-test', (req,   res)    =>  {
+
+    const   {body}  =   req;
+    let arrAux  =   {...body};
+
+    console.log(arrAux);
+
+    res.sendStatus(200);
+})
+
 
 export  default router;
