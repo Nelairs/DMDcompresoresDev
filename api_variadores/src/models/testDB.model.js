@@ -11,6 +11,10 @@ const   Schema  =   new mongoose.Schema({
         type:   Number,
         required:   true
     },
+    modelo_equipo:{
+        type:   String,
+        required:   true
+    },
     marca_equipo:{
         type:   String
     },
@@ -21,7 +25,7 @@ const   Schema  =   new mongoose.Schema({
     numero_serie_equipo:{
         type:   String
     },
-    entrada_a_revision_desarrollo:{
+    fecha_de_entrada:{
         type:   String,
         required:   true
     },
