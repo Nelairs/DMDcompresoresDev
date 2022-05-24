@@ -47,12 +47,14 @@ router.get('/variadores',   (req,   res)    =>  {
     dbMethods.getAll()
     .then(function(v)   {
         arrAux = [];
-        arrAux =   v; 
+        arrAux =   v;
+        res.status(200).send(arrAux) 
     })
     .catch(function(err)  {
         console.log('error:'    +   err);
+        res.sendStatus(500);
     });
-    res.status(200).send(arrAux)
+    
 })
 
 /* -------------------------------------------------------------------------- */
