@@ -1,26 +1,6 @@
 import mongoose from 'mongoose';
 import  {   DbTestModel }   from    '../models/testDB.model.js';
 
-const equipoTest = {
-    nombre_cliente: "DMD",
-    numero_equipo: 1312,
-    marca_equipo: "Danfoss",
-    potencia_equipo: "37kW",
-    numero_serie_equipo: "625537g12hq1",
-    entrada_a_revision_desarrollo:  new Date(),
-    estado_equipo:  1
-};
-/*
-export  async   function    create(){
-
-    try {
-        const response  =   await   DbTestModel.create(arrAux);
-        console.log(response);
-    } catch (error) {
-        console.log(error);
-    }
-}
-*/
 
 export  async   function    post(arrAux){
 
@@ -33,7 +13,6 @@ export  async   function    post(arrAux){
 }
 
 
-
 export  async   function    getAll(){
 
     try {
@@ -44,6 +23,16 @@ export  async   function    getAll(){
     }
 }
 
+
+export  async   function    update(idFront, newState){
+
+    try {
+        const   response    =   await   DbTestModel.updateOne({_id: idFront},   {$set:{'estado_equipo': newState}});
+        return  response;
+    } catch (error) {
+        console.log(error);
+    }
+}
 /*
 export  async   function    get(){
     

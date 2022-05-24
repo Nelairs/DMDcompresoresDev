@@ -80,12 +80,15 @@ router.post('/formPost',    (req,   res)    =>  {
     res.sendStatus(200);
 })
 
-router.post('/update-test', (req,   res)    =>  {
+router.post('/update', (req,   res)    =>  {
 
     const   {body}  =   req;
     let arrAux  =   {...body};
 
-    console.log(arrAux);
+    console.log(arrAux._id);
+    console.log(arrAux.estado_equipo);
+
+    dbMethods.update(arrAux._id,    arrAux.estado_equipo);
 
     res.sendStatus(200);
 })

@@ -8,7 +8,7 @@ const   Schema  =   new mongoose.Schema({
         required:   true
     },
     numero_equipo:{
-        type:   Number,
+        type:   String,
         required:   true
     },
     modelo_equipo:{
