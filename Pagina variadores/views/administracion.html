@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>practica post</title>
+    <link rel="stylesheet" href="../css/estilos2.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#navbar").load("../components/navbar.html");
+        $("#footer").load("../components/footer.html");
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/administracion.js"></script>
+    <script src="../js/formulario.js"></script>
+  </head>
+    
+  <body>
+    <div class="flex flex-col h-full justify-between ">
+      <!-- Navbar -->  
+      <div id="navbar"></div>
+      <!-- Contenedor -->
+      <div class="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid grid-cols gap-y-6 content-stretch place-items-center" id="contenedor">
+      </div>
+      <!-- Footer -->
+      <div class="flex-1 flex items-end">
+        <div id="footer" class="w-full"></div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="estilosAñadir" class="overflow-x-hidden hidden text-black fixed right-0 left-0 top-0 bottom-0 bg-black bg-opacity-50 ">
+      <div class="flex justify-center items-center h-full w-full">
+        <div class="h-auto w-auto border rounded bg-gray-300">
+          <!-- Acciones -->
+          <div class="flex justify-end">
+            <button type="button" id="botonAñadirCerrar">cerrar</button>
+          </div>
+
+          <!-- Formulario -->
+          <form class="container flex flex-1 flex-col items-center" id="formulario">
+            <div class="form border bg-gray-100 rounded shadow-xl h-auto w-auto">
+                <header class="flex flex-col items-center ">
+                  <h1 id="title">Variadores</h1>
+                  <p class="text-xs text-gray-800" id="description">
+                    Ingrese los datos del variador
+                  </p>
+                </header>
+                <form id="survey-form" >
+                  <div class="form-group p-3">
+                    <label id="name-label" for="name">Cliente:</label>
+                    <input
+                      class="border border-slate-800 rounded"
+                      id="nombre_cliente"
+                      type="Name"
+                      placeholder="Nombre del cliente"
+                      required
+                    />
+                  </div>
+                  <div class="form-group p-3">
+                    <label id="number-label" for="age">N° Equipo:</label>
+                    <input
+                      class="border border-slate-800 rounded"
+                      type="number"
+                      min="16"
+                      max="99"
+                      id="numero_equipo"
+                      required
+                    />
+                  </div>
+                  <div class="form-group p-3">
+                    <label id="marca-label" for="marca_equipo">Marca:</label>
+                    <input
+                      class="border border-slate-800 rounded"
+                      id="marca_equipo"
+                      type="Name"
+                      placeholder="Marca del equipo"
+                      required
+                    />
+                  </div>
+                  <div class="form-group p-3">
+                    <label id="modelo-label" for="name">Modelo:</label>
+                    <input
+                      class="border border-slate-800 rounded"
+                      id="modelo"
+                      type="modelo"
+                      placeholder="Modelo"
+                      required
+                    />
+                  </div>
+                  <div class="form-group p-3">
+                    <label id="potencia-label" for="potencia_equipo">Potencia(Kw):</label>
+                    <input
+                      class="border border-slate-800 rounded"
+                      type="number"
+                      min="16"
+                      max="99"
+                      id="potencia_equipo"
+                      required
+                    />
+                  </div>
+                  <div class="form-group p-3">
+                    <label id="serie-label" for="numero_serie">N° serie:</label>
+                    <input
+                      class="border border-slate-800 rounded"
+                      id="numero_serie"
+                      type="Name"
+                      placeholder="numero de serie"
+                      required
+                    />
+                  </div>
+                </form>
+                <div class=" flex flex-col pt-6 items-center">
+                <button type="submit" id="submit" class="button bg-black p-1.5 border rounded">
+                  <strong class="text-white">Submit</strong>
+                </button>
+              </div>
+            </div>
+          </form>
+          <div id="footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
