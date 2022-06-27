@@ -99,14 +99,16 @@ router.post('/update', (req,   res)    =>  {
 /*                                    MISC                                    */
 /* -------------------------------------------------------------------------- */
 
-router.delete('/finish', (req,   res)    =>  {
+router.post('/finish', (req,   res)    =>  {
 
     const   {body}  =   req;
     let arrAux  =   {...body};
 
+    console.log(arrAux._id);
+
     dbMethods.del(arrAux._id);
 
-    res.sendStatus(200)
+    res.sendStatus(200).send(`Borrado OK ID: ${arrAux._id}`)
 })
 
 
