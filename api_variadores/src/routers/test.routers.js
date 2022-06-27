@@ -87,12 +87,26 @@ router.post('/update', (req,   res)    =>  {
     const   {body}  =   req;
     let arrAux  =   {...body};
 
-    console.log(arrAux._id);
-    console.log(arrAux.estado_equipo);
+    //console.log(arrAux._id);
+    //console.log(arrAux.estado_equipo);
 
     dbMethods.update(arrAux._id,    arrAux.estado_equipo);
 
     res.sendStatus(200);
+});
+
+/* -------------------------------------------------------------------------- */
+/*                                    MISC                                    */
+/* -------------------------------------------------------------------------- */
+
+router.delete('/finish', (req,   res)    =>  {
+
+    const   {body}  =   req;
+    let arrAux  =   {...body};
+
+    dbMethods.del(arrAux._id);
+
+    res.sendStatus(200)
 })
 
 

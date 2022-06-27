@@ -33,8 +33,13 @@ export  async   function    update(idFront, newState){
         console.log(error);
     }
 }
-/*
-export  async   function    get(){
+
+export  async   function    del(idFront){
     
+    try {
+        const response  =   await   DbTestModel.deleteOne({_id: idFront})
+        return response
+    } catch (error) {
+        console.log(error);
+    }
 }
-*/
