@@ -37,8 +37,19 @@ export  async   function    update(idFront, newState){
 export  async   function    del(idFront){
     
     try {
+        console.log(`El ID a borrar es: ${idFront}`);
         const response  =   await   DbTestModel.deleteOne({_id: idFront})
         return response
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export  async   function    getByID(idFront){
+
+    try {
+        const   response    =   await   DbTestModel.findById({_id: idFront});
+        return  response;
     } catch (error) {
         console.log(error);
     }

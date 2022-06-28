@@ -1,11 +1,12 @@
 import express, { json, urlencoded } from 'express';
-import  router  from './routers/test.routers.js';
+import  router  from './routers/variadores.routers.js';
+import AuthRouter from './routers/auth.router.js'
 import  cors    from    'cors';
 import  './config/db.config.js';
 import  './config/passport.config.js'
 import  session  from 'express-session';
 import passport from 'passport';
-import AuthRouter from './routers/auth.router.js'
+
 
 /* -------------------------------------------------------------------------- */
 /*                               EXPRESS CONFIG                               */

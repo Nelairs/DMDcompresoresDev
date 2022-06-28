@@ -2,7 +2,9 @@ import express from 'express';
 import  cors    from    'cors';
 import faker    from    '@faker-js/faker';
 import  *   as dbMethods from '../db/db.methods.js';
+import  *   as mailMethods from '../utils/mailSender.utils.js'
 
+//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
 
 const   app =   express();
 const router =  express.Router();
@@ -99,16 +101,39 @@ router.post('/update', (req,   res)    =>  {
 /*                                    MISC                                    */
 /* -------------------------------------------------------------------------- */
 
-router.post('/finish', (req,   res)    =>  {
+router.post('/finish', async (req,   res)    =>  {
 
     const   {body}  =   req;
-    let arrAux  =   {...body};
+    let arrBody  =   {...body};
+    let arrAux  =   []
 
-    console.log(arrAux._id);
+    await dbMethods.getByID(arrBody._id)
+    .then(function(v)   {
+        arrAux = [];
+        arrAux =   v;
+        //res.status(200).send(arrAux) 
+    })
+    .catch(function(err)  {
+        console.log('error:'    +   err);
+        //res.sendStatus(500);
+    });
 
-    dbMethods.del(arrAux._id);
+    let addOpts =   {
+        to: ['soporte@dmdcompresores.com','jcaminos@dmdcompresores.com'],
+        text:   arrAux
+    }
 
-    res.sendStatus(200).send(`Borrado OK ID: ${arrAux._id}`)
+    await dbMethods.del(arrBody._id)
+    .then(
+
+        mailMethods.sendMail(addOpts),
+        res.status(200).send(`Borrado OK ID: ${arrBody._id}`))
+    .catch((e)    =>  {
+        console.log(e),
+        res.statusCode(500)
+    });
+
+    
 })
 
 
