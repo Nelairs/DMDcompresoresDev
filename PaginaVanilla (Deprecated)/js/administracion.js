@@ -3,7 +3,7 @@ $(document).ready(() => {
   let i=0
   let nombre 
   let color,estado
-  let variadores ="http://175.10.0.166:8080/variadores"
+  let variadores ="http://175.10.0.166:8080/api/variadores"
   let update = "http://175.10.0.166:8080/update"
   
   

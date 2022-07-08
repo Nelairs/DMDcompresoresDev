@@ -1,5 +1,5 @@
 $(document).ready(()=>{
-    let updateTest ="http://175.10.0.166:8080/formPost"
+    let updateTest ="http://175.10.0.166:8080/api/formPost"
 
 $("#formulario").submit(()=>{
     let name = $("#nombre_cliente").val();
