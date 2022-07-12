@@ -4,7 +4,7 @@ $(document).ready(() => {
   let nombre 
   let color,estado
   let variadores ="http://175.10.0.166:8080/api/variadores"
-  let update = "http://175.10.0.166:8080/update"
+  let update = "http://175.10.0.166:8080/api/update"
   
   
   
