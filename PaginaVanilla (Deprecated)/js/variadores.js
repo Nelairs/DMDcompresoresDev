@@ -6,7 +6,7 @@ $(document).ready(() => {
   let color,estado
   let list = "http://175.10.0.166:8080/list"
   let faker ="http://175.10.0.166:8080/faker"
-  let variadores ="http://175.10.0.166:8080/variadores"
+  let variadores ="http://175.10.0.166:8080/api/variadores"
 
   const getDatabase = () => axios.get(variadores)
       .then((res)=>{

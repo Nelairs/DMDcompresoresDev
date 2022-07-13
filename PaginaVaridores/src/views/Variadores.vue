@@ -1,36 +1,32 @@
 <template>
 <div class="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid grid-cols gap-y-6 content-stretch place-items-center">
 <Card :array="dataVariadores"/>
-<BtnAdd />
+
 </div>
 </template>
 
 <script>
-import axios from "axios";
+import {getDataBase} from "@/utils/functions";
 import Card from "@/components/Card.vue"
 import BtnAdd from "@/components/BtnAdd.vue"
-
+import {mapState} from "vuex"
 
 export default {
   name: "variadores",
   data() {
     return {
-      dataVariadores: [],
+      dataVariadores:  getDataBase(),
     };
   },
   components:{
     Card, BtnAdd
   },
-  methods: {
-    getDataBase() {
-      axios.get("http://175.10.0.166:8080/api/variadores").then((res) => {
-        this.dataVariadores = res.data;
-      });
-    },
+  mounted() {
+  
   },
-  created() {
-    this.getDataBase();
-  },
+  computed: {
+    ...mapState(['endpointData'])
+  }
 };
 </script>
 
