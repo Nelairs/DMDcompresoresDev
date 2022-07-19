@@ -1,38 +1,53 @@
 <template>
-<div class="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid grid-cols gap-y-6 content-stretch place-items-center">
-<Card :array="dataVariadores"/>
+  <div
+    class="
+      sm:grid-cols-2
+      md:grid-cols-3
+      lg:grid-cols-4
+      grid grid-cols
+      gap-y-6
+      content-stretch
+      place-items-center
+    "
+  >
 
-</div>
+    <Card v-for="item in dataVariadores" :key="item._id" :item="item" @accion="getDataBase" />
+
+  </div>
 </template>
 
 <script>
-import {getDataBase} from "@/utils/functions";
-import Card from "@/components/Card.vue"
-import BtnAdd from "@/components/BtnAdd.vue"
-import {mapState} from "vuex"
+import Card from "@/components/Card.vue";
+import BtnAdd from "@/components/BtnAdd.vue";
+import axios from "axios";
 
 export default {
   name: "variadores",
   data() {
     return {
-      dataVariadores:  getDataBase(),
+      dataVariadores: [],
     };
   },
-  components:{
-    Card, BtnAdd
+  components: {
+    Card,
+    BtnAdd,
   },
-  mounted() {
-  
+  methods: {
+    getDataBase() {
+      axios.get("http://175.10.0.166:8080/api/variadores").then((res) => {
+        this.dataVariadores = res.data;
+      });
+    },
   },
-  computed: {
-    ...mapState(['endpointData'])
-  }
+  created() {
+    this.getDataBase();
+  },
 };
 </script>
 
 <style scoped>
-button{
-cursor: context-menu; 
-text-decoration: None !important;
+button {
+  cursor: context-menu;
+  text-decoration: None !important;
 }
 </style>

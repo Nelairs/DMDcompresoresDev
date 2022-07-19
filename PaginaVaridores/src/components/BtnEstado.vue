@@ -30,7 +30,6 @@ export default {
     },
     methods:{
         getStatusColor(status){
-            
              return this.statuses[status].color
         }
     }

@@ -19,7 +19,8 @@
         imagenNav:logo,
         botonesNav:['Home','Variadores','Administracion']
     }
-  }
+  },
+  
   
  }
  </script>
