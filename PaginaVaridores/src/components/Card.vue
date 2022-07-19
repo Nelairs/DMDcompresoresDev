@@ -52,18 +52,26 @@ export default {
       cliente = cliente.replace(/["_"]/g, " ");
       return cliente;
     },
+
     deleteVariador(id){
       axios.post('http://175.10.0.166:8080/api/finish',{
         _id:id
       })
       .then(()=>{
-        this.accion()
+        this.pasarId(id)
+        console.log('salio bien');
       })
+      .catch(()=>{
+        
+        console.log('salio mal')
+      })
+    }, 
+
+     pasarId(id) {
+      this.$emit("delete",id);
     }
   },
-  accion() {
-      this.$emit("accion");
-    },
+
 };
 </script>
 

@@ -11,7 +11,7 @@
     "
   >
 
-    <Card v-for="item in dataVariadores" :key="item._id" :item="item" :isEdit="true"/>
+    <Card v-for="item in dataVariadores" :key="item._id" :item="item" :isEdit="true" @delete="deleteCard"/>
 
   </div>
 </template>
@@ -38,6 +38,15 @@ export default {
         this.dataVariadores = res.data;
       });
     },
+    deleteCard(id){
+      console.log(id);
+    console.log(this.dataVariadores);
+    const index = this.dataVariadores.findIndex(object => {
+    return object._id === id;
+    });
+   this.dataVariadores.splice(index,1)
+    console.log(this.dataVariadores);
+    }
   },
   created() {
     this.getDataBase();

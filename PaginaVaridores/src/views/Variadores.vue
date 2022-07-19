@@ -11,7 +11,7 @@
     "
   >
 
-    <Card v-for="item in dataVariadores" :key="item._id" :item="item" @accion="getDataBase" />
+    <Card v-for="item in dataVariadores" :key="item._id" :item="item"  />
 
   </div>
 </template>
@@ -20,6 +20,7 @@
 import Card from "@/components/Card.vue";
 import BtnAdd from "@/components/BtnAdd.vue";
 import axios from "axios";
+import { createLogger } from 'vuex';
 
 export default {
   name: "variadores",
@@ -37,10 +38,11 @@ export default {
       axios.get("http://175.10.0.166:8080/api/variadores").then((res) => {
         this.dataVariadores = res.data;
       });
-    },
+    }
   },
   created() {
     this.getDataBase();
+
   },
 };
 </script>
