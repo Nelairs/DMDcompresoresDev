@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="w-20 h-20">
-      <img :src="imagen" alt=""/>
+      <img :src="imagen" alt="" class="p-1"/>
     </div>
 
     <div class="flex flex-row items-center">

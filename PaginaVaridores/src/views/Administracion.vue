@@ -12,7 +12,7 @@
   >
 
     <Card v-for="item in dataVariadores" :key="item._id" :item="item" :isEdit="true" @delete="deleteCard"/>
-
+    <BtnAdd/>
   </div>
 </template>
 
