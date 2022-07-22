@@ -147,9 +147,10 @@ router.post("/formPost", (req, res) => {
 
   dbMethods.post(arrAux);
 
-  res.sendStatus(200);
 
-  res.sendStatus(200);
+  res.status(200).send(arrAux);
+
+  
 });
 
 router.post("/update", (req, res) => {
