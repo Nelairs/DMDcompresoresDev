@@ -5,6 +5,8 @@ import * as dbMethods from '../db/db.methods.js'
 dotenv.config()
 // replace the value below with the Telegram token you receive from @BotFather
 const   token   =  process.env.TELEGRAM_TOKEN
+
+let chatId_group  =   null;
 // Create a bot that uses 'polling' to fetch new updates
 
 
@@ -13,10 +15,12 @@ const bot = new TelegramBot(token, {polling:    true});
 
 bot.onText(/\/start/, function (msg) {
     // if (config.bot.users.indexOf(msg.from.id) == -1) return;
-    var chatId = msg.chat.id;
-    var reply = 'Hi ' + msg.chat.first_name + ' 🙌, I\'m your 🤖\nI\'ve been created to give you all the informations regarding the status of your torrents 😊. Start with /help to get a list of all available commands';
+    let chatId = msg.chat.id;
+    chatId_group    =   msg.chat.id
+    let reply = 'Hi ' + msg.chat.first_name + ' 🙌, I\'m your 🤖\nI\'ve been created to give you all the informations regarding the status of your torrents 😊. Start with /help to get a list of all available commands';
     // bot.sendMessage(chatId, reply, engine.listOfCommandsKeyboard);
     bot.sendMessage(chatId, reply);
+    console.log(chatId);
 });
 
 bot.onText(/\/variadores/, function (msg) {
@@ -70,6 +74,10 @@ bot.onText(/\/variadores/, function (msg) {
     
 //   });
 
+/* -------------------------------------------------------------------------- */
+/*                                  FUNCIONES                                 */
+/* -------------------------------------------------------------------------- */
+
 
 const stateTransform =  (state) =>  {
 
@@ -87,4 +95,10 @@ const stateTransform =  (state) =>  {
             return  'Por hacer 🟨'
             // break;
     }
+}
+
+export const sendTgramNoti =   (msgData)  =>  {
+    console.log('TELEGRAM MSG');
+    let chatId  =   chatId_group
+    bot.sendMessage(chatId,   msgData)
 }

@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import faker from "@faker-js/faker";
 import * as dbMethods from "../db/db.methods.js";
+import * as telegramMethods  from '../utils/telegramSender.utils.js'
 import * as mailMethods from "../utils/mailSender.utils.js";
 import passport from "../utils/passport.utils.js";
 //import * as AuthMiddleware from "../middlewares/auth.middleware.js";
@@ -198,6 +199,7 @@ router.post("/finish", async (req, res) => {
   await dbMethods
     .del(arrBody._id)
     .then(
+      telegramMethods.sendTgramNoti(arrAux.nombre_cliente),
       mailMethods.sendMail(addOpts),
       res.status(200).send(`Borrado OK ID: ${arrBody._id}`)
     )
