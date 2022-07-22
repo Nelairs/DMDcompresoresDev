@@ -6,7 +6,7 @@ export  async   function    post(arrAux){
 
     try {
         const response  =   await   DbTestModel.create(arrAux);
-        console.log(response);
+        //console.log(response);
     } catch (error) {
         console.log(error);
     }
@@ -37,7 +37,7 @@ export  async   function    update(idFront, newState){
 export  async   function    del(idFront){
     
     try {
-        console.log(`El ID a borrar es: ${idFront}`);
+        //console.log(`El ID a borrar es: ${idFront}`);
         const response  =   await   DbTestModel.deleteOne({_id: idFront})
         return response
     } catch (error) {

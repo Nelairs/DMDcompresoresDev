@@ -26,7 +26,7 @@ const   Schema  =   new mongoose.Schema({
         type:   String
     },
     fecha_de_entrada:{
-        type:   String,
+        type:   Object,
         required:   true
     },
     estado_equipo:{

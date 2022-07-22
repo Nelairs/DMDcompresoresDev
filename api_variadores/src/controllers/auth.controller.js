@@ -1,5 +1,3 @@
-import path from "path";
-
 /* -------------------------------------------------------------------------- */
 /*                                   signup                                   */
 /* -------------------------------------------------------------------------- */
@@ -40,7 +38,7 @@ export function getLogin(req, res) {
 }
 export function postLogin(req, res) {
   const user = req.user;
-  console.log(user);
+  //console.log(user);
   res.status(200).send(user);
 }
 

@@ -24,13 +24,20 @@ export  async   function sendMail(addOpts){
     try{
         mailOptions.to =    addOpts.to;
         mailOptions.html    =   
-        `<h1>VARIADOR Nro. ${addOpts.text.numero_equipo} DE ${addOpts.text.nombre_cliente}</h1>
-            <br>
-            <ul>
-            <li><p>MARCA: ${addOpts.text.marca_equipo}</p></li><br>
-            <li><p>S/N: ${addOpts.text.numero_serie_equipo}</p></li><br>
-            <li><p>POTENCIA: ${addOpts.text.potencia_equipo}kW</p></li><br>
-            </ul>
+        `<html>
+            <head>
+            <script src="https://cdn.tailwindcss.com"></script>
+            </head>
+            <body>
+                <h1>VARIADOR Nro. ${addOpts.text.numero_equipo} DE ${addOpts.text.nombre_cliente}</h1>
+                <br>
+                    <ul>
+                    <li><p>MARCA: ${addOpts.text.marca_equipo}</p></li><br>
+                    <li><p>S/N: ${addOpts.text.numero_serie_equipo}</p></li><br>
+                    <li><p>POTENCIA: ${addOpts.text.potencia_equipo}kW</p></li><br>
+                    </ul>
+            </body>
+        </html>
         `
         console.log(mailOptions);
         const response  =   await   transporter.sendMail(mailOptions)

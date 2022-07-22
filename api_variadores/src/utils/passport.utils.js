@@ -22,6 +22,7 @@ passport.use(
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
+          permissions: req.body.permissions,
         };
         const user = await UserModel.create(newUser);
         return done(null, user);
