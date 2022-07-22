@@ -39,9 +39,9 @@ export  async   function sendMail(addOpts){
             </body>
         </html>
         `
-        console.log(mailOptions);
+        //console.log(mailOptions);
         const response  =   await   transporter.sendMail(mailOptions)
-        console.log(response);
+        // console.log(response);
     }catch(error){
         console.log(error);
     }

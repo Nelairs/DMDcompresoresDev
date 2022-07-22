@@ -20,7 +20,7 @@ bot.onText(/\/start/, function (msg) {
     let reply = 'Hi ' + msg.chat.first_name + ' 🙌, I\'m your 🤖\nI\'ve been created to give you all the informations regarding the status of your torrents 😊. Start with /help to get a list of all available commands';
     // bot.sendMessage(chatId, reply, engine.listOfCommandsKeyboard);
     bot.sendMessage(chatId, reply);
-    console.log(chatId);
+    // console.log(chatId);
 });
 
 bot.onText(/\/variadores/, function (msg) {
