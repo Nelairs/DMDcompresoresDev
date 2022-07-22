@@ -199,7 +199,7 @@ router.post("/finish", async (req, res) => {
   await dbMethods
     .del(arrBody._id)
     .then(
-      telegramMethods.sendTgramNoti(arrAux.nombre_cliente),
+      telegramMethods.sendTgramNoti(arrAux),
       mailMethods.sendMail(addOpts),
       res.status(200).send(`Borrado OK ID: ${arrBody._id}`)
     )

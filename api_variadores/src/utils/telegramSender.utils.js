@@ -98,7 +98,12 @@ const stateTransform =  (state) =>  {
 }
 
 export const sendTgramNoti =   (msgData)  =>  {
-    console.log('TELEGRAM MSG');
+    // console.log('TELEGRAM MSG');
     let chatId  =   chatId_group
-    bot.sendMessage(chatId,   msgData)
+
+    let pushNotification    =   `El variador de ${msgData.nombre_cliente}\n
+                                Nro.Cliente ${msgData.numero_equipo}\n
+                                esta finalizado ✔`
+
+    bot.sendMessage(chatId,   pushNotification)
 }
