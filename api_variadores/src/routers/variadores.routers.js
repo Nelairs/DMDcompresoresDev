@@ -138,7 +138,7 @@ router.post("/testPost", (req, res) => {
   let arrayTest = { ...body };
 
   console.log(arrayTest);
-  res.status(200).send(`LO QUE MANDASTE ES ${JSON.stringify(arrayTest)}`);
+  res.status(200).send(`LO QUE MANDASTE ES ${arrayTest}`);
 });
 
 router.post("/formPost", (req, res) => {
