@@ -4,7 +4,8 @@ import faker from "@faker-js/faker";
 import * as dbMethods from "../db/db.methods.js";
 import * as telegramMethods  from '../utils/telegramSender.utils.js'
 import * as mailMethods from "../utils/mailSender.utils.js";
-import passport from "../utils/passport.utils.js";
+
+
 //import * as AuthMiddleware from "../middlewares/auth.middleware.js";
 //import * as PermMiddleware from "../middlewares/permissions.middelware.js";
 
@@ -50,6 +51,7 @@ router.get("/variadores", (req, res) => {
     .then(function (v) {
       arrAux = [];
       arrAux = v;
+      
       res.status(200).send(arrAux);
     })
     .catch(function (err) {
@@ -58,6 +60,20 @@ router.get("/variadores", (req, res) => {
     });
 });
 
+router.get("/variadores/historicos",  (req, res)  =>  {
+
+  dbMethods
+    .getAllHistoric()
+    .then(function (v) {
+      arrAux = [];
+      arrAux = v;
+      res.status(200).send(arrAux);
+    })
+    .catch(function (err) {
+      console.log("error:" + err);
+      res.sendStatus(500);
+    });  
+})
 /* router.get(
   "/variadores/admin",
   AuthMiddleware.checkAuthentication,
@@ -146,10 +162,14 @@ router.post("/formPost", (req, res) => {
   const { body } = req;
   let arrAux = { ...body };
 
-  dbMethods.post(arrAux);
+  dbMethods.post(arrAux)
+  .then(function(v){
+    console.log(v);
+    res.status(200).send(v)
+  }
+  );
 
 
-  res.status(200).send(arrAux);
 
   
 });
@@ -173,8 +193,8 @@ router.post("/update", (req, res) => {
 router.post("/finish", async (req, res) => {
   const { body } = req;
   let arrBody = { ...body };
-  let arrAux = [];
-
+  let arrAux = {};
+  let arrArchive  = {};
   /* -------- TRAIGO LA DATA DEL VFD A BORRAR PARA CARGARLA EN EL MAIL -------- */
 
   await dbMethods
@@ -182,6 +202,16 @@ router.post("/finish", async (req, res) => {
     .then(function (v) {
       arrAux = [];
       arrAux = v;
+      arrArchive  = {
+        fecha_de_salida:  arrBody.fecha_de_salida,
+        nombre_cliente: arrAux.nombre_cliente,
+        numero_equipo:  arrAux.numero_equipo,
+        modelo_equipo:  arrAux.modelo_equipo,
+        marca_equipo: arrAux.marca_equipo,
+        potencia_equipo:  arrAux.potencia_equipo,
+        numero_serie_equipo:  arrAux.numero_serie_equipo,
+        fecha_de_entrada: arrAux.fecha_de_entrada
+      }
     })
     .catch(function (err) {
       console.log("error:" + err);
@@ -206,6 +236,12 @@ router.post("/finish", async (req, res) => {
     .catch((e) => {
       console.log(e), res.statusCode(500);
     });
+
+    console.log(arrArchive);
+
+  await dbMethods
+  .postHist(arrArchive)
+  
 });
 
 export default router;

@@ -1,6 +1,8 @@
 import TelegramBot from "node-telegram-bot-api";
 import dotenv from 'dotenv'
 import * as dbMethods from '../db/db.methods.js'
+import fs  from 'fs';
+
 
 dotenv.config()
 // replace the value below with the Telegram token you receive from @BotFather
@@ -21,6 +23,8 @@ bot.onText(/\/start/, function (msg) {
     // bot.sendMessage(chatId, reply, engine.listOfCommandsKeyboard);
     bot.sendMessage(chatId, reply);
     // console.log(chatId);
+
+    
 });
 
 bot.onText(/\/variadores/, function (msg) {
