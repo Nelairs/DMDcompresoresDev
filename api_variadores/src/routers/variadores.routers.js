@@ -1,10 +1,8 @@
 import express from "express";
 import cors from "cors";
-import faker from "@faker-js/faker";
 import * as dbMethods from "../db/db.methods.js";
-import * as telegramMethods  from '../utils/telegramSender.utils.js'
+// import * as telegramMethods from "../utils/telegramSender.utils.js";
 import * as mailMethods from "../utils/mailSender.utils.js";
-
 
 //import * as AuthMiddleware from "../middlewares/auth.middleware.js";
 //import * as PermMiddleware from "../middlewares/permissions.middelware.js";
@@ -12,7 +10,6 @@ import * as mailMethods from "../utils/mailSender.utils.js";
 const app = express();
 const router = express.Router();
 
-const arrFaker = [];
 let arrAux = [];
 app.use(cors());
 
@@ -25,43 +22,79 @@ router.get("/", (req, res) => {
   res.sendStatus(200);
 });
 
-router.get("/faker", (req, res) => {
-  for (let i = 0; i < 10; i++) {
-    const product = {
-      title: faker.commerce.product(),
-      description: faker.commerce.productDescription(),
-      price: faker.commerce.price(100, 5000, 2, "$"),
-      image: faker.image.technics(),
-    };
-    arrFaker.push(product);
+router.get("/variadores", (req, res) => {
+  //LISTA VARIADORES VIEW ONLY
+  let finishedVar = 'false';
+
+  if (req.query.finished == 'undefined') {
+    // console.log(`HARDCODE`);
+    finishedVar = 'false';
+  } else {
+    finishedVar = req.query.finished;
+    // console.log(`ACA ${typeof(req.query.finished)}`);
   }
 
-  res.status(200).redirect("/list");
+  if (finishedVar === 'true') {
+    // FILTRO POR TRUE/TERMINADOS
+    // console.log(`FILTRADO POR TRUE`);
+    if (req.query.name !== 'undefined') {
+      // FILTRO POR NOMBRE
+      dbMethods
+        .getFilteredHist(req.query.name)
+        .then(function (v) {
+          arrAux = [];
+          arrAux = v;
+          res.status(200).send(arrAux);
+        })
+        .catch(function (err) {
+          console.log("error:" + err);
+          res.sendStatus(500);
+        });
+    } else {
+      dbMethods
+        .getAllHistoric()
+        .then(function (v) {
+          arrAux = [];
+          arrAux = v;
+          res.status(200).send(arrAux);
+        })
+        .catch(function (err) {
+          console.log("error:" + err);
+          res.sendStatus(500);
+        });
+    }
+  } else if(finishedVar === 'false') {
+    // FILTRO POR TODOS/NO FINALIZADOS
+    // console.log(`FILTRADO POR FALSES`);
+    if (req.query.name !== 'undefined') {
+      dbMethods
+        .getFiltered(req.query.name)
+        .then(function (v) {
+          arrAux = [];
+          arrAux = v;
+          res.status(200).send(arrAux);
+        })
+        .catch(function (err) {
+          console.log("error:" + err);
+          res.sendStatus(500);
+        });
+    } else {
+      dbMethods
+        .getAll()
+        .then(function (v) {
+          arrAux = [];
+          arrAux = v;
+          res.status(200).send(arrAux);
+        })
+        .catch(function (err) {
+          console.log("error:" + err);
+          res.sendStatus(500);
+        });
+    }
+  }
 });
 
-router.get("/list", (req, res) => {
-  res.status(200).send(arrFaker);
-});
-
-router.get("/variadores", (req, res) => {
-  //LISTA VARIADORES VIEW ONLYS
-
-  dbMethods
-    .getAll()
-    .then(function (v) {
-      arrAux = [];
-      arrAux = v;
-      
-      res.status(200).send(arrAux);
-    })
-    .catch(function (err) {
-      console.log("error:" + err);
-      res.sendStatus(500);
-    });
-});
-
-router.get("/variadores/historicos",  (req, res)  =>  {
-
+router.get("/variadores/historicos", (req, res) => {
   dbMethods
     .getAllHistoric()
     .then(function (v) {
@@ -72,8 +105,9 @@ router.get("/variadores/historicos",  (req, res)  =>  {
     .catch(function (err) {
       console.log("error:" + err);
       res.sendStatus(500);
-    });  
-})
+    });
+});
+
 /* router.get(
   "/variadores/admin",
   AuthMiddleware.checkAuthentication,
@@ -82,7 +116,7 @@ router.get("/variadores/historicos",  (req, res)  =>  {
 
     const { body } = req;
     let idFront = { ...body };
-
+    
     let allowed = false;
 
     console.log(idFront);
@@ -92,7 +126,7 @@ router.get("/variadores/historicos",  (req, res)  =>  {
         console.log(permissions[0]);
         if (permissions[0].includes("vfd_admin")) {
           allowed = true;
-
+          
           dbMethods
             .getAll()
             .then(function (v) {
@@ -113,65 +147,46 @@ router.get("/variadores/historicos",  (req, res)  =>  {
         res.sendStatus(500);
       });
   }
-);
- */
+  );
+  */
 
 router.get(
   "/variadores/admin",
-  
+
   (req, res) => {
     //LISTA VARIADORES VIEW ONLYS
 
     const { body } = req;
     let idFront = { ...body };
 
-  
-
     //console.log(idFront);
-    
-          dbMethods
-            .getAll()
-            .then(function (v) {
-              arrAux = [];
-              arrAux = v;
-              res.status(200).send(arrAux);
-            })
-            .catch(function (err) {
-              console.log("error:" + err);
-              res.sendStatus(500);
-            });
-       
-      })
-     
-  
 
+    dbMethods
+      .getAll()
+      .then(function (v) {
+        arrAux = [];
+        arrAux = v;
+        res.status(200).send(arrAux);
+      })
+      .catch(function (err) {
+        console.log("error:" + err);
+        res.sendStatus(500);
+      });
+  }
+);
 
 /* -------------------------------------------------------------------------- */
 /*                                    POST                                    */
 /* -------------------------------------------------------------------------- */
 
-router.post("/testPost", (req, res) => {
-  const { body } = req;
-  let arrayTest = { ...body };
-
-  console.log(arrayTest);
-  res.status(200).send(`LO QUE MANDASTE ES ${arrayTest}`);
-});
-
 router.post("/formPost", (req, res) => {
   const { body } = req;
   let arrAux = { ...body };
 
-  dbMethods.post(arrAux)
-  .then(function(v){
+  dbMethods.post(arrAux).then(function (v) {
     console.log(v);
-    res.status(200).send(v)
-  }
-  );
-
-
-
-  
+    res.status(200).send(v);
+  });
 });
 
 router.post("/update", (req, res) => {
@@ -194,7 +209,7 @@ router.post("/finish", async (req, res) => {
   const { body } = req;
   let arrBody = { ...body };
   let arrAux = {};
-  let arrArchive  = {};
+  let arrArchive = {};
   /* -------- TRAIGO LA DATA DEL VFD A BORRAR PARA CARGARLA EN EL MAIL -------- */
 
   await dbMethods
@@ -202,16 +217,20 @@ router.post("/finish", async (req, res) => {
     .then(function (v) {
       arrAux = [];
       arrAux = v;
-      arrArchive  = {
-        fecha_de_salida:  arrBody.fecha_de_salida,
+
+      arrArchive = {
+        fecha_de_salida: arrBody.fecha_de_salida,
+        informe_salida: arrBody.conclusion,
+        horas_dedicadas: arrBody.horas_dedicadas,
         nombre_cliente: arrAux.nombre_cliente,
-        numero_equipo:  arrAux.numero_equipo,
-        modelo_equipo:  arrAux.modelo_equipo,
+        numero_equipo: arrAux.numero_equipo,
+        modelo_equipo: arrAux.modelo_equipo,
         marca_equipo: arrAux.marca_equipo,
-        potencia_equipo:  arrAux.potencia_equipo,
-        numero_serie_equipo:  arrAux.numero_serie_equipo,
-        fecha_de_entrada: arrAux.fecha_de_entrada
-      }
+        potencia_equipo: arrAux.potencia_equipo,
+        numero_serie_equipo: arrAux.numero_serie_equipo,
+        fecha_de_entrada: arrAux.fecha_de_entrada,
+        estado_equipo: 3   //ESTADO 3 PARA TERMINADO 
+      };
     })
     .catch(function (err) {
       console.log("error:" + err);
@@ -229,7 +248,7 @@ router.post("/finish", async (req, res) => {
   await dbMethods
     .del(arrBody._id)
     .then(
-      telegramMethods.sendTgramNoti(arrAux),
+      // telegramMethods.sendTgramNoti(arrAux),
       mailMethods.sendMail(addOpts),
       res.status(200).send(`Borrado OK ID: ${arrBody._id}`)
     )
@@ -237,11 +256,11 @@ router.post("/finish", async (req, res) => {
       console.log(e), res.statusCode(500);
     });
 
-    console.log(arrArchive);
+  // console.log(arrArchive);
 
-  await dbMethods
-  .postHist(arrArchive)
-  
+  /* ------------------- CARGO EL VARIADOR EN LOS HISTORICOS ------------------ */
+
+  await dbMethods.postHist(arrArchive);
 });
 
 export default router;

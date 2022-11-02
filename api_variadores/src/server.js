@@ -4,7 +4,7 @@ import AuthRouter from './routers/auth.router.js'
 import  cors    from    'cors';
 import  './config/db.config.js';
 import  './config/passport.config.js'
-import './utils/telegramSender.utils.js'
+// import './utils/telegramSender.utils.js'
 import  session  from 'express-session';
 import passport from 'passport';
 
@@ -15,7 +15,7 @@ import { networkInterfaces } from 'os';
 const nets = networkInterfaces();
 const results = {}; // Or just '{}', an empty object
 
-for (const name of Object.keys(nets)) {
+for (const name of Object.keys(nets)) { 
     for (const net of nets[name]) {
         // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
         // 'IPv4' is in Node <= 17, from 18 it's a number 4 or 6

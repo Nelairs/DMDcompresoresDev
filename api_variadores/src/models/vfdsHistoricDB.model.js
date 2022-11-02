@@ -29,13 +29,20 @@ const   Schema  =   new mongoose.Schema({
         type:   Date,
         required:   true
     },
-    fecha_de_salida:{
+    fecha_de_salida:{   
         type:   Date,
         required:   true
     },
     informe_salida:{
         type:   String,
         required:   false
+    },
+    horas_dedicadas:{
+        type:   Number
+    },
+    estado_equipo:{
+        type:   Number,
+        required:   true
     }
 
 });

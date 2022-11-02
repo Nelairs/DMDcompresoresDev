@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 import  {   DbTestModel }   from    '../models/vfdsDB.model.js';
 
 import { DbHistoricModel } from '../models/vfdsHistoricDB.model.js';
@@ -28,6 +28,17 @@ export  async   function    getAll(){
     }
 }
 
+export  async   function    getFiltered(name){
+ 
+    try {
+        const   response    =   await   DbTestModel.find({'nombre_cliente': {$regex: `^${name}`}});
+        // 
+        // const   response    =   await   dbName.find();
+        return  response;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export  async   function    update(idFront, newState){
 
@@ -40,7 +51,7 @@ export  async   function    update(idFront, newState){
 }
 
 export  async   function    del(idFront){
-    
+
     try {
         //console.log(`El ID a borrar es: ${idFront}`);
         const response  =   await   DbTestModel.deleteOne({_id: idFront})
@@ -79,6 +90,17 @@ export  async   function    getAllHistoric(){
 
     try {
         const   response    =   await   DbHistoricModel.find();
+        
+        // const   response    =   await   dbName.find();
+        return  response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+export  async   function    getFilteredHist(name){
+
+    try {
+    const   response    =   await   DbHistoricModel.find({'nombre_cliente': {$regex: `^${name}`}});
         
         // const   response    =   await   dbName.find();
         return  response;
