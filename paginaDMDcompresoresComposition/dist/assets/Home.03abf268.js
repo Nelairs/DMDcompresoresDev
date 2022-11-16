@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper.cdc0426e.js";import{o,c as s,a as t}from"./index.63e94d3a.js";const c="/assets/home.691dc226.jpg",_={},r={class:"home"},a=t("img",{src:c,alt:""},null,-1),n=[a];function m(i,d){return o(),s("div",r,n)}const p=e(_,[["render",m]]);export{p as default};
